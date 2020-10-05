@@ -1,0 +1,27 @@
+Fuzzy Stock Market Prediction
+
+INPUTS
+-------
+1. RSI (Relative Strength Index) [0-10]
+    HIGH
+    MIDDLE
+    LOW
+
+2. MACD (Moving Average Convergence Divergence) [0 - 10]
+    LOW
+    HIGH
+
+OUTPUT
+-------
+1. STOCK ACTION [0 - 10]
+    BUY
+    HOLD
+    SELL
+
+RULES
+------
+1. If RSI is HIGH THEN SELL
+
+2. If RSI is LOW OR MIDDLE, and MACD is LOW THEN HOLD
+
+3. If RSI is LOW OR MIDDLE and MACD is HIGH THEN BUY
