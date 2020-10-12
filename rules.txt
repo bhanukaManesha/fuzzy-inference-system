@@ -8,8 +8,8 @@ INPUTS
     LOW
 
 2. MACD (Moving Average Convergence Divergence) [0 - 10]
-    LOW
-    HIGH
+    BELOW
+    ABOVE
 
 OUTPUT
 -------
