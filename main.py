@@ -7,7 +7,7 @@ import pandas as pd
 #   * RSI and MACD is has a range [0, 1]
 #   * MOMENTUM also has a range one [0,1]
 x_rsi = np.arange(0, 11, 1)
-x_macd = np.arange(0, 11, 1)
+x_macd = np.arange(-10, 11, 1)
 x_momentum = np.arange(0, 11, 1)
 
 # Generate fuzzy membership functions
@@ -15,8 +15,8 @@ rsi_low = fuzz.trapmf(x_rsi, [0, 0, 1, 5])
 rsi_middle = fuzz.trimf(x_rsi, [3, 5, 7])
 rsi_high = fuzz.trapmf(x_rsi, [5, 9, 10, 10])
 
-macd_above = fuzz.trapmf(x_macd, [4, 6, 10, 10])
-macd_below = fuzz.trapmf(x_macd, [0, 0, 4, 6])
+macd_above = fuzz.trapmf(x_macd, [-2, 2, 10, 10])
+macd_below = fuzz.trapmf(x_macd, [-10, -10, -2, 2])
 
 momentum_bearish = fuzz.trimf(x_momentum, [0, 0, 4])
 momentum_neutral = fuzz.trapmf(x_momentum, [2, 4, 6, 8])
