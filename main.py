@@ -71,12 +71,12 @@ for rsi in RSI:
         macd_level_below = fuzz.interp_membership(x_macd, macd_below, macd)
         macd_level_above = fuzz.interp_membership(x_macd, macd_above, macd)
 
-        active_rule2 = np.fmin(macd_level_below, np.fmax(rsi_level_lo, rsi_level_md))
-        active_rule3 = np.fmin(macd_level_above, np.fmax(rsi_level_lo, rsi_level_md))
+        active_rule1 = np.fmin(rsi_level_hi, macd_level_above)
+        active_rule2 = np.fmin(macd_level_above, np.fmax(rsi_level_lo, rsi_level_md))
 
-        bullish_activation = np.fmin(rsi_level_hi, momentum_bullish)
+        bullish_activation = np.fmin(active_rule1, momentum_bullish)
         neutral_activation = np.fmin(active_rule2, momentum_neutral)
-        bearish_activation = np.fmin(active_rule3, momentum_bearish)
+        bearish_activation = np.fmin(macd_level_below, momentum_bearish)
 
         momentum0 = np.zeros_like(x_momentum)
 
