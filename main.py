@@ -23,24 +23,29 @@ momentum_neutral = fuzz.trapmf(x_momentum, [2, 4, 6, 8])
 momentum_bullish = fuzz.trimf(x_momentum, [6, 10, 10])
 
 # Visualize these universes and membership functions
-fig, (ax0, ax1, ax2) = plt.subplots(nrows=3, figsize=(8, 9))
+fig, ax0 = plt.subplots(figsize=(8, 3))
 
 ax0.plot(x_rsi, rsi_low, 'b', linewidth=1.5, label='Low')
 ax0.plot(x_rsi, rsi_middle, 'g', linewidth=1.5, label='Middle')
 ax0.plot(x_rsi, rsi_high, 'r', linewidth=1.5, label='High')
 ax0.set_title('RSI')
 ax0.legend()
+plt.savefig('plots/rsi.eps')
 
+fig, ax1 = plt.subplots(figsize=(8, 3))
 ax1.plot(x_macd, macd_below, 'b', linewidth=1.5, label='Below')
 ax1.plot(x_macd, macd_above, 'g', linewidth=1.5, label='Above')
 ax1.set_title('MACD')
 ax1.legend()
+plt.savefig('plots/macd.eps')
 
+fig, ax2 = plt.subplots(figsize=(8, 3))
 ax2.plot(x_momentum, momentum_bearish, 'b', linewidth=1.5, label='Bearish')
 ax2.plot(x_momentum, momentum_neutral, 'g', linewidth=1.5, label='Neutral')
 ax2.plot(x_momentum, momentum_bullish, 'r', linewidth=1.5, label='Bullish')
-ax2.set_title('Stock Action')
+ax2.set_title('Momentum')
 ax2.legend()
+plt.savefig('plots/output.eps')
 
 # Turn off top/right axes
 for ax in (ax0, ax1, ax2):
@@ -50,12 +55,12 @@ for ax in (ax0, ax1, ax2):
     ax.get_yaxis().tick_left()
 
 plt.tight_layout()
-plt.savefig('plots/membership_functions.png')
+plt.savefig('plots/membership_functions.eps')
 
 results = []
 
-RSI = np.arange(0, 2, 0.5)
-MACD = np.arange(0, 2)
+RSI = [0,3.5,5,6.5,10]
+MACD = [-10,-1,0,1,10]
 
 for rsi in RSI:
     for macd in MACD:
@@ -101,8 +106,8 @@ for rsi in RSI:
 
         plt.tight_layout()
 
-        exp_name = 'RSI (' + str(rsi) + ')_MACD (' + str(macd) + ')'
-        plt.savefig('plots/outputs/'+exp_name+'.png')
+        exp_name = 'RSI(' + str(rsi) + ')_MACD(' + str(macd) + ')'
+        plt.savefig('plots/outputs/'+exp_name+'.eps')
 
         # Aggregate all three output membership functions together
         aggregated = np.fmax(bullish_activation,
@@ -124,7 +129,7 @@ for rsi in RSI:
         ax0.fill_between(x_momentum, momentum0, aggregated, facecolor='Orange', alpha=0.7)
         ax0.plot([momentum_centroid, momentum_centroid], [0, momentum_activation_centroid], 'k', color='blue', linewidth=1.5, alpha=0.9, label='centroid')
         ax0.plot([momentum_bisector, momentum_bisector], [0, momentum_activation_bisector], 'k', color='red', linewidth=1.5, alpha=0.9, label='bisector')
-        ax0.set_title('Aggregated membership and result (line)')
+        ax0.set_title('RSI : ' + str(rsi) + ' | MACD : ' + str(macd))
         ax0.legend()
 
         # Turn off top/right axes
@@ -135,8 +140,8 @@ for rsi in RSI:
             ax.get_yaxis().tick_left()
 
         plt.tight_layout()
-        exp_name = 'RSI (' + str(rsi) + ')_MACD (' + str(macd) + ')'
-        plt.savefig('plots/defuzz/'+exp_name+'.png')
+        exp_name = 'RSI(' + str(rsi) + ')_MACD(' + str(macd) + ')'
+        plt.savefig('plots/defuzz/'+exp_name+'.eps')
 
         results.append([rsi, macd, momentum_centroid, momentum_bisector])
 
