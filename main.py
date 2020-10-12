@@ -1,7 +1,25 @@
 import numpy as np
-import skfuzzy as fuzz
-import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.pyplot as plt
+import skfuzzy as fuzz
+import os
+
+# Creating the folders for plots
+try:
+    os.mkdir('plots')
+except OSError:
+    pass
+
+try:
+    os.mkdir('plots/defuzz')
+except OSError:
+    pass
+
+try:
+    os.mkdir('plots/outputs')
+except OSError:
+    pass
+
 
 # Generate universe variables
 #   * RSI and MACD is has a range [0, 1]
